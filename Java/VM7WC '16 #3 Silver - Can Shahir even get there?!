@@ -1,0 +1,107 @@
+import java.util.*;
+import java.io.*;
+public class Main {
+  public static void main(String[] args) throws IOException{
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    String [] s = in.readLine().split(" ");
+    
+    int r = Integer.parseInt(s[0]);
+    int c = Integer.parseInt(s[1]);
+    s = in.readLine().split(" ");
+    int sr = Integer.parseInt(s[0]);
+    int sc = Integer.parseInt(s[1]);
+    s = in.readLine().split(" ");
+    int er = Integer.parseInt(s[0]);
+    int ec = Integer.parseInt(s[1]);
+
+    char[][] map = new char[r][c];
+    int[][] step = new int [r][c];
+
+    for (int i=0;i<r;i++)
+    {
+      Arrays.fill(step[i], (1<<30));
+    }
+
+    for (int i=0;i<r;i++)
+    {
+      map[i] = in.readLine().toCharArray();
+    }
+    step[sr][sc] = 0;
+    
+    LinkedList <Integer> queue = new LinkedList<Integer>();
+    
+    LinkedList <Integer> tqueue = new LinkedList<Integer>();
+
+    int tele = Integer.parseInt(in.readLine());
+    for (int i=0;i<tele;i++)
+    {
+      s = in.readLine().split(" ");
+      int tr = Integer.parseInt(s[0]);
+      int tc = Integer.parseInt(s[1]);
+      tqueue.add(tr);
+      tqueue.add(tc);
+    }
+
+    queue.add(sr);
+    queue.add(sc);
+
+    while(!queue.isEmpty())
+    {
+      int n = queue.poll();
+      int m = queue.poll();
+      //up
+      if (n + 1 < r)
+      {
+        if (step[n][m] + 1 < step[n+1][m] && map[n+1][m] != 'X')
+        {
+          queue.add(n+1);
+          queue.add(m);
+          step[n+1][m] = step[n][m] + 1;
+        }
+      }
+      //down
+      if (n - 1 >= 0)
+      {
+        if (step[n][m] + 1 < step[n-1][m] && map[n-1][m] != 'X')
+        {
+          queue.add(n-1);
+          queue.add(m);
+          step[n-1][m] = step[n][m] + 1;
+        }
+      }
+      //right
+      if (m + 1 < c)
+      {
+        if (step[n][m] + 1 < step[n][m + 1] && map[n][m+1] != 'X')
+        {
+          queue.add(n);
+          queue.add(m+1);
+          step[n][m+1] = step[n][m] + 1;
+        }
+      }
+      //left
+      if (m - 1 >= 0)
+      {
+        if (step[n][m] + 1 < step[n][m - 1] && map[n][m - 1] != 'X')
+        {
+          queue.add(n);
+          queue.add(m - 1);
+          step[n][m-1] = step[n][m] + 1;
+        }
+      }
+    }
+    
+    int time = 0;
+     while (!tqueue.isEmpty())
+     {
+       int n=tqueue.poll();
+       int m=tqueue.poll();
+
+       if(step[er][ec] - step[n][m] > time)
+       {
+          time = step[er][ec] - step[n][m];
+       }
+     }
+    System.out.println(time);
+  }
+}
