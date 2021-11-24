@@ -2,7 +2,10 @@ import java.util.*;
 public class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    int startx = sc.nextInt(), starty = sc.nextInt(), endx = sc.nextInt(), endy = sc.nextInt();
+    int startx = sc.nextInt();
+    int starty = sc.nextInt();
+    int endx = sc.nextInt();
+    int endy = sc.nextInt();
     int[][] dist = new int[9][9];
     for(int i = 0; i < 9;i++) Arrays.fill(dist[i],Integer.MAX_VALUE);
     LinkedList<Integer>xq = new LinkedList<Integer>();
@@ -10,7 +13,9 @@ public class Main {
     dist[startx][starty] = 0;
     xq.push(startx);
     yq.push(starty);
-    //this is a bit different than the c++ solution, as it uses arrays to store the changes in x and y, and loops through these and adds them to a square's x and y coordinates to get a neighbouring node
+    */this is a bit different than the c++ solution, as it uses arrays 
+    to store the changes in x and y, and loops through these and adds 
+    them to a square's x and y coordinates to get a neighbouring node
     int[] dx = {1, 2, 2, 1, -1, -2, -2, -1}; 
     int[] dy = {2, 1, -1, -2, -2, -1, 1, 2};
     while(!xq.isEmpty()){
