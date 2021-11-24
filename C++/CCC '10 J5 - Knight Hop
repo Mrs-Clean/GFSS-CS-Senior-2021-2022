@@ -4,7 +4,8 @@ using namespace std;
 const int INF = 1e9; //declares big number
 int dis[9][9]; //distance array
 queue< pair<int, int> >bfs; //bfs queue, contains pairs that hold the x and y coordinates 
-void hop(int oldx, int oldy, int newx, int newy){ //function to checks if the move is valid and the shortest path to that square
+//function to checks if the move is valid and the shortest path to that square
+void hop(int oldx, int oldy, int newx, int newy){ 
   if(newx < 1 || newx > 8) return;
   if(newy < 1 || newy > 8) return;
   if(dis[newx][newy] > dis[oldx][oldy] + 1){
