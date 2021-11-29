@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+int n, k; //k = pies, n = people
+
+int solve(int index, int pies){ //the index of the person we're on, the number of pies remaining
+  if(index == k) return 1; //base case, if we are on the last person
+  int out = 0; //out stores the number of possible sequences for the current scenario
+  for(int z = 0; z * (k - index + 1) <= pies; z++){ //loops throught the possible amounts we can increase the current person by
+    out += solve(index + 1, pies - z * (k - index + 1)); //recursively calls the method
+  }
+  return out; //returns the solution to the current problem
+}
+int main() {
+  cin >> n >> k;
+  cout << solve(1, n - k) << endl;
+}
