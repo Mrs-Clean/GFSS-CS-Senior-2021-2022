@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void rec(int ones, int length, string output){ //# of 1's left, # of bits left, output is the string we print out
+  if(length == 1){ //base case, when we are on the last index
+    if(ones == 1){ //if there is only one 1 left, the last index must be 1
+      cout << output << 1 << endl;
+    }
+    if(ones == 0){ //if there are no 1 left, the last index must be 0
+      cout << output << 0 << endl;
+    }
+    //if all 1's have not been allocated; we discard these cases
+    return;
+  }
+  if(ones > 0){ //setting current index to one if that is possible
+    rec(ones - 1, length - 1, output + '1');
+  }
+  rec(ones, length - 1, output + '0'); //setting current index to zero
+}
+int main() {
+  int cases; //number of test cases for this problem
+  cin >> cases;
+  for(int z = 0; z < cases; z++){
+    cout << "The bit patterns are" << endl;
+    int n, k;
+    cin >> n >> k;
+    rec(k, n, "");
+    cout << endl;
+  }
+}
